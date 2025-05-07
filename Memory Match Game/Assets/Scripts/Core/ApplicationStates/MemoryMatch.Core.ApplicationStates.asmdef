@@ -1,0 +1,16 @@
+{
+    "name": "MemoryMatch.Core.ApplicationStates",
+    "rootNamespace": "",
+    "references": [
+        "GUID:f973319a6fb33954ab5fa8a371bcb1d0"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
