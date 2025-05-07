@@ -1,3 +1,4 @@
+using MemoryMatch.Core.ApplicationStates;
 using MemoryMatch.Models;
 using System.Collections;
 using System.Collections.Generic;
@@ -29,14 +30,6 @@ namespace MemoryMatch.Core.Card
         private const float CardLifeTime = 1;
 
         private Coroutine m_FlipCardCoroutine;
-
-        private void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                GenerateCards();
-            }
-        }
 
         public void GenerateCards()
         {

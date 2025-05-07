@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace MemoryMatch.Core.ApplicationStates.States
@@ -12,9 +13,13 @@ namespace MemoryMatch.Core.ApplicationStates.States
 
         public override string Name => StateIndex.Gameplay.ToString();
 
+        private ICardControllable m_CardController;
+
         public override void StateIn(params object[] args)
         {
             Debug.Log($"[StateIn] Enter {Name}");
+            m_CardController = Object.FindObjectsOfType<MonoBehaviour>().OfType<ICardControllable>().FirstOrDefault();
+            m_CardController.GenerateCards();
         }
 
         public override void StateOut()

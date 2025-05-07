@@ -1,4 +1,4 @@
-namespace MemoryMatch.Core.Card
+namespace MemoryMatch.Core.ApplicationStates
 {
     public interface ICardControllable
     {

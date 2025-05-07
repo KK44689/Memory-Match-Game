@@ -2,7 +2,8 @@
     "name": "MemoryMatch.Core.Card",
     "rootNamespace": "",
     "references": [
-        "GUID:0fd0df922081ece43b4c1b14f956ec28"
+        "GUID:0fd0df922081ece43b4c1b14f956ec28",
+        "GUID:2b8771e9cd02e75498f5a866b56d1d05"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
