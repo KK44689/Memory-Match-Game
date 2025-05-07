@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace MemoryMatch.Core.ApplicationStates
 {
     public abstract class BaseApplicationState

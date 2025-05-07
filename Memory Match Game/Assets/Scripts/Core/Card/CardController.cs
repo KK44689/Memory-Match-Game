@@ -1,4 +1,4 @@
-using MemoryMatch.Core.ApplicationStates;
+using MemoryMatch.Core.ApplicationStates.ControllerInterfaces;
 using MemoryMatch.Models;
 using System.Collections;
 using System.Collections.Generic;

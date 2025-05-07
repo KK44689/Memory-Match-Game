@@ -1,4 +1,4 @@
-namespace MemoryMatch.Core.ApplicationStates
+namespace MemoryMatch.Models
 {
     public enum StateIndex
     {

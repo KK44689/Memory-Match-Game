@@ -1,8 +1,8 @@
 {
-    "name": "MemoryMatch.Core.ApplicationStates",
+    "name": "MemoryMatch.UI",
     "rootNamespace": "",
     "references": [
-        "GUID:f973319a6fb33954ab5fa8a371bcb1d0",
+        "GUID:80809f9fef4743944b4204d830ba2188",
         "GUID:0fd0df922081ece43b4c1b14f956ec28"
     ],
     "includePlatforms": [],

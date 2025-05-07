@@ -1,7 +1,8 @@
+using MemoryMatch.Models;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace MemoryMatch.Models
+namespace MemoryMatch.Core.Card
 {
     public interface ICardElementUI
     {

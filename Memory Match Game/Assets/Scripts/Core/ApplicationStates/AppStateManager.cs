@@ -1,4 +1,5 @@
 using MemoryMatch.Core.ApplicationStates.States;
+using MemoryMatch.Models;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.Events;
@@ -37,12 +38,10 @@ namespace MemoryMatch.Core.ApplicationStates
 
             if(newState == null)
             {
-                //TODO : throw error or do something on invalid request;
+                throw new System.Exception("New State is null!");
             }
             else
             {
-                //May need improvement when implementing state change validation.
-
                 if(CurrentState != null)
                 {
                     CurrentState.StateOut();
@@ -62,7 +61,6 @@ namespace MemoryMatch.Core.ApplicationStates
         {
             var asyncLoad = SceneManager.LoadSceneAsync((int)stateId);
 
-            // Wait until the asynchronous scene fully loads
             while(!asyncLoad.isDone)
             {
                 yield return null;

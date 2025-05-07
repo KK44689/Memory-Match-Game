@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using MemoryMatch.Models;
 using UnityEngine;
 
 namespace MemoryMatch.Core.ApplicationStates.States
