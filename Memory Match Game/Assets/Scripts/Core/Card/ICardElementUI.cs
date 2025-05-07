@@ -1,3 +1,6 @@
+using UnityEngine;
+using UnityEngine.Events;
+
 namespace MemoryMatch.Models
 {
     public interface ICardElementUI
@@ -6,7 +9,10 @@ namespace MemoryMatch.Models
         int MatchId { get; set; }
         bool IsAlreadyMatch { get; set; }
         CardStatus CurrentCardStatus { get; set; }
-        
+
+        UnityAction<int> OnCardFliped { get; set; }
+
         void FlipCard(CardStatus status);
+        void SetFrontTexture(Texture2D texture);
     }
 }

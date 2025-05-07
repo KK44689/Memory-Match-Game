@@ -1,5 +1,6 @@
 using MemoryMatch.Models;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -25,15 +26,7 @@ namespace MemoryMatch.Core.Card
         public int MatchId { get; set; }
         public bool IsAlreadyMatch { get; set; } = false;
         public CardStatus CurrentCardStatus { get; set; } = CardStatus.FaceDown;
-
-        void Update()
-        {
-            if(Input.GetKeyDown(KeyCode.Space))
-            {
-                var status = CurrentCardStatus == CardStatus.FaceDown ? CardStatus.FaceUp : CardStatus.FaceDown;
-                FlipCard(status);
-            }
-        }
+        public UnityAction<int> OnCardFliped { get; set; }
 
         public void FlipCard(CardStatus status)
         {
@@ -54,6 +47,12 @@ namespace MemoryMatch.Core.Card
         {
             var status = CurrentCardStatus == CardStatus.FaceDown ? CardStatus.FaceUp : CardStatus.FaceDown;
             FlipCard(status);
+            OnCardFliped?.Invoke(Id);
+        }
+
+        public void SetFrontTexture(Texture2D texture)
+        {
+            m_FrontTexture = texture;
         }
     }
 }

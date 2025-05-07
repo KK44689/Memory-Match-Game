@@ -323,6 +323,10 @@ MonoBehaviour:
   m_CardPrefab: {fileID: 6698096029074211100, guid: eef9becf7fe11c74b977d27d764f2e16, type: 3}
   m_CardContainer: {fileID: 213138413}
   m_LayoutGroup: {fileID: 213138414}
+  m_CardFrontList:
+  - {fileID: 2800000, guid: eea78cc46fd779c48874ff9efcd206b5, type: 3}
+  - {fileID: 2800000, guid: 571b2afd4a067a945a65bcb6095348c4, type: 3}
+  - {fileID: 2800000, guid: a28b689e43be02f4fa91e69fd503da86, type: 3}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

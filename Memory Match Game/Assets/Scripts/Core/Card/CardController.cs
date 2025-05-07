@@ -1,3 +1,7 @@
+using MemoryMatch.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,6 +18,14 @@ namespace MemoryMatch.Core.Card
         [SerializeField]
         private GridLayoutGroup m_LayoutGroup;
 
+        [SerializeField]
+        private List<Texture2D> m_CardFrontList;
+
+        private Dictionary<Texture2D, int> m_SetTextureAmountDictionary = new Dictionary<Texture2D, int>();
+
+        private List<ICardElementUI> m_CurrentFlipedIds;
+        private List<ICardElementUI> m_SpawnedCards = new List<ICardElementUI>();
+
         private void Update()
         {
             if(Input.GetKeyDown(KeyCode.Space))
@@ -24,10 +36,37 @@ namespace MemoryMatch.Core.Card
 
         public void GenerateCards()
         {
+            InitFrontSprite();
+
             for(int i = 0; i < 6; i++)
             {
-                Instantiate(m_CardPrefab, m_CardContainer);
+                var card = Instantiate(m_CardPrefab, m_CardContainer);
+                var cardElement = card.GetComponent<ICardElementUI>();
+                cardElement.Id = i;
+                cardElement.OnCardFliped += OnCardFlipedHandler;
+
+                // random texture
+                int randomTextureIndex = UnityEngine.Random.Range(0, m_SetTextureAmountDictionary.Count);
+                var texture = m_SetTextureAmountDictionary.Select(pair => pair.Key).ToList();
+                cardElement.SetFrontTexture(texture[randomTextureIndex]);
+                m_SetTextureAmountDictionary[texture[randomTextureIndex]]++;
+                if(m_SetTextureAmountDictionary[texture[randomTextureIndex]] >= 2) m_SetTextureAmountDictionary.Remove(texture[randomTextureIndex]);
+
+                m_SpawnedCards.Add(cardElement);
             }
+        }
+
+        private void InitFrontSprite()
+        {
+            foreach(var texture in m_CardFrontList)
+            {
+                m_SetTextureAmountDictionary.Add(texture, 0);
+            }
+        }
+
+        private void OnCardFlipedHandler(int id)
+        {
+            Debug.Log($"card flip: {id}");
         }
     }
 }
