@@ -1,5 +1,6 @@
 using MemoryMatch.Models;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -25,6 +26,8 @@ namespace MemoryMatch.Core.Card
 
         private List<ICardElementUI> m_CurrentFlipedIds;
         private List<ICardElementUI> m_SpawnedCards = new List<ICardElementUI>();
+
+        private const float CardLifeTime = 1;
 
         private void Update()
         {
@@ -64,9 +67,21 @@ namespace MemoryMatch.Core.Card
             }
         }
 
-        private void OnCardFlipedHandler(int id)
+        private IEnumerator StartCardCountDown(ICardElementUI card)
         {
-            Debug.Log($"card flip: {id}");
+            yield return new WaitForSeconds(CardLifeTime);
+            card.FlipCard(CardStatus.FaceDown);
+        }
+
+        private void OnCardFlipedHandler(ICardElementUI card)
+        {
+            Debug.Log($"card flip: {card.Id}");
+            if(card.CurrentCardStatus == CardStatus.FaceUp) return;
+            else if(card.CurrentCardStatus == CardStatus.FaceDown)
+            {
+                card.FlipCard(CardStatus.FaceUp);
+                StartCoroutine(StartCardCountDown(card));
+            }
         }
     }
 }

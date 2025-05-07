@@ -21,13 +21,11 @@ namespace MemoryMatch.Core.Card
         [SerializeField]
         private RawImage m_RawImage;
 
-        private float m_CardLifeTime = 1;
-
         public int Id { get; set; }
         public int MatchId { get; set; }
         public bool IsAlreadyMatch { get; set; } = false;
         public CardStatus CurrentCardStatus { get; set; } = CardStatus.FaceDown;
-        public UnityAction<int> OnCardFliped { get; set; }
+        public UnityAction<ICardElementUI> OnCardFliped { get; set; }
 
         public void FlipCard(CardStatus status)
         {
@@ -44,22 +42,9 @@ namespace MemoryMatch.Core.Card
             }
         }
 
-        private IEnumerator StartCardCountDown()
-        {
-            yield return new WaitForSeconds(m_CardLifeTime);
-            FlipCard(CardStatus.FaceDown);
-        }
-
         public void OnPointerDown(PointerEventData eventData)
         {
-            if(CurrentCardStatus == CardStatus.FaceUp) return;
-            else if(CurrentCardStatus == CardStatus.FaceDown)
-            {
-                FlipCard(CardStatus.FaceUp);
-                StartCoroutine(StartCardCountDown());
-            }
-
-            OnCardFliped?.Invoke(Id);
+            OnCardFliped?.Invoke(this);
         }
 
         public void SetFrontTexture(Texture2D texture)

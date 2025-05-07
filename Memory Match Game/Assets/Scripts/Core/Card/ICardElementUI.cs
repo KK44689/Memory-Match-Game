@@ -10,7 +10,7 @@ namespace MemoryMatch.Models
         bool IsAlreadyMatch { get; set; }
         CardStatus CurrentCardStatus { get; set; }
 
-        UnityAction<int> OnCardFliped { get; set; }
+        UnityAction<ICardElementUI> OnCardFliped { get; set; }
 
         void FlipCard(CardStatus status);
         void SetFrontTexture(Texture2D texture);
