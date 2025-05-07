@@ -1,0 +1,16 @@
+{
+    "name": "MemoryMatch.Core.Card",
+    "rootNamespace": "",
+    "references": [
+        "GUID:0fd0df922081ece43b4c1b14f956ec28"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

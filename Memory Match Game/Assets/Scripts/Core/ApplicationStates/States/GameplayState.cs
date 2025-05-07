@@ -17,7 +17,6 @@ namespace MemoryMatch.Core.ApplicationStates.States
         public override void StateIn(params object[] args)
         {
             Debug.Log($"[StateIn] Enter {Name}");
-            m_AppStateManager.ChangeStateTo(StateIndex.End);
         }
 
         public override void StateOut()
