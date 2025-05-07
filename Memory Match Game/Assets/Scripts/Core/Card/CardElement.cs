@@ -1,5 +1,6 @@
 using MemoryMatch.Models;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MemoryMatch.Core.Card
 {
@@ -9,29 +10,27 @@ namespace MemoryMatch.Core.Card
         private CardStatus cardStatus;
 
         [SerializeField]
-        private Material m_FrontMaterial;
+        private Texture2D m_FrontTexture;
 
         [SerializeField]
-        private Material m_BackMaterial;
+        private Texture2D m_BackTexture;
+
+        [SerializeField]
+        private RawImage m_RawImage;
 
         private float m_CardLifeTime;
-        private Renderer m_Renderer;
 
         public int Id { get; set; }
         public int MatchId { get; set; }
         public bool IsAlreadyMatch { get; set; } = false;
         public CardStatus CurrentCardStatus { get; set; } = CardStatus.FaceDown;
 
-        private void Awake()
-        {
-            m_Renderer = GetComponent<Renderer>();
-        }
-
         void Update()
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
-                FlipCard(CurrentCardStatus);
+                var status = CurrentCardStatus == CardStatus.FaceDown ? CardStatus.FaceUp : CardStatus.FaceDown;
+                FlipCard(status);
             }
         }
 
@@ -42,10 +41,10 @@ namespace MemoryMatch.Core.Card
             switch(status)
             {
                 case CardStatus.FaceDown:
-                    m_Renderer.material = m_BackMaterial;
+                    m_RawImage.texture = m_BackTexture;
                     break;
                 case CardStatus.FaceUp:
-                    m_Renderer.material = m_FrontMaterial;
+                    m_RawImage.texture = m_FrontTexture;
                     break;
             }
         }
