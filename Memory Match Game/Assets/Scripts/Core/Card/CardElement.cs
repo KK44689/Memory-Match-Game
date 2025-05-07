@@ -1,5 +1,4 @@
 using MemoryMatch.Models;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -26,6 +25,7 @@ namespace MemoryMatch.Core.Card
         public bool IsAlreadyMatch { get; set; } = false;
         public CardStatus CurrentCardStatus { get; set; } = CardStatus.FaceDown;
         public UnityAction<ICardElementUI> OnCardFliped { get; set; }
+        public Texture2D FrontTexture { get => m_FrontTexture; }
 
         public void FlipCard(CardStatus status)
         {
@@ -44,6 +44,7 @@ namespace MemoryMatch.Core.Card
 
         public void OnPointerDown(PointerEventData eventData)
         {
+            if(IsAlreadyMatch) return;
             OnCardFliped?.Invoke(this);
         }
 

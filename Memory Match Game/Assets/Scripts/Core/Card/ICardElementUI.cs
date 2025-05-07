@@ -8,6 +8,7 @@ namespace MemoryMatch.Models
         int Id { get; set; }
         int MatchId { get; set; }
         bool IsAlreadyMatch { get; set; }
+        Texture2D FrontTexture { get; }
         CardStatus CurrentCardStatus { get; set; }
 
         UnityAction<ICardElementUI> OnCardFliped { get; set; }
