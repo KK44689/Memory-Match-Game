@@ -1,4 +1,5 @@
 using MemoryMatch.Models;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
@@ -20,7 +21,7 @@ namespace MemoryMatch.Core.Card
         [SerializeField]
         private RawImage m_RawImage;
 
-        private float m_CardLifeTime;
+        private float m_CardLifeTime = 1;
 
         public int Id { get; set; }
         public int MatchId { get; set; }
@@ -43,10 +44,21 @@ namespace MemoryMatch.Core.Card
             }
         }
 
+        private IEnumerator StartCardCountDown()
+        {
+            yield return new WaitForSeconds(m_CardLifeTime);
+            FlipCard(CardStatus.FaceDown);
+        }
+
         public void OnPointerDown(PointerEventData eventData)
         {
-            var status = CurrentCardStatus == CardStatus.FaceDown ? CardStatus.FaceUp : CardStatus.FaceDown;
-            FlipCard(status);
+            if(CurrentCardStatus == CardStatus.FaceUp) return;
+            else if(CurrentCardStatus == CardStatus.FaceDown)
+            {
+                FlipCard(CardStatus.FaceUp);
+                StartCoroutine(StartCardCountDown());
+            }
+
             OnCardFliped?.Invoke(Id);
         }
 
