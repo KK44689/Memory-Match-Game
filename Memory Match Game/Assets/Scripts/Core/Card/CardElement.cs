@@ -1,10 +1,11 @@
 using MemoryMatch.Models;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace MemoryMatch.Core.Card
 {
-    public class CardElement : MonoBehaviour, ICardElementUI
+    public class CardElement : MonoBehaviour, ICardElementUI, IPointerDownHandler
     {
         [SerializeField]
         private CardStatus cardStatus;
@@ -47,6 +48,12 @@ namespace MemoryMatch.Core.Card
                     m_RawImage.texture = m_FrontTexture;
                     break;
             }
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            var status = CurrentCardStatus == CardStatus.FaceDown ? CardStatus.FaceUp : CardStatus.FaceDown;
+            FlipCard(status);
         }
     }
 }
