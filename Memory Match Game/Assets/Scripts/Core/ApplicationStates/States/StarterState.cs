@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 namespace MemoryMatch.Core.ApplicationStates.States
@@ -10,15 +11,24 @@ namespace MemoryMatch.Core.ApplicationStates.States
 
         public override string Name => StateIndex.Starter.ToString();
 
+        private IMenuControllable m_MenuController;
+
         public override void StateIn(params object[] args)
         {
             Debug.Log($"[StateIn] Enter {Name}");
-            m_AppStateManager.StartLoadScene(StateIndex.Gameplay);
+            m_MenuController = Object.FindObjectsOfType<MonoBehaviour>().OfType<IMenuControllable>().FirstOrDefault();
+            m_MenuController.OnGameplayStarted += GameplayStartedHandler;
         }
 
         public override void StateOut()
         {
             Debug.Log($"[StateOut] Exit {Name}");
+            m_MenuController.OnGameplayStarted -= GameplayStartedHandler;
+        }
+
+        private void GameplayStartedHandler()
+        {
+            m_AppStateManager.StartLoadScene(StateIndex.Gameplay);
         }
     }
 }
