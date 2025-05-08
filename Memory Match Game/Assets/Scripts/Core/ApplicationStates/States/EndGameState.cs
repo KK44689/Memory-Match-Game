@@ -5,7 +5,7 @@ namespace MemoryMatch.Core.ApplicationStates.States
 {
     public class EndGameState : BaseApplicationState
     {
-        public EndGameState(AppStateManager manager) : base(manager)
+        public EndGameState(IStateManagable manager) : base(manager)
         {
         }
 

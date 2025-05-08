@@ -2,7 +2,7 @@ namespace MemoryMatch.Core.ApplicationStates
 {
     public abstract class BaseApplicationState
     {
-        public BaseApplicationState(AppStateManager manager)
+        public BaseApplicationState(IStateManagable manager)
         {
             m_AppStateManager = manager;
         }
@@ -11,7 +11,7 @@ namespace MemoryMatch.Core.ApplicationStates
 
         public abstract string Name { get; }
 
-        protected AppStateManager m_AppStateManager;
+        protected IStateManagable m_AppStateManager;
 
         public abstract void StateIn(params object[] args);
 

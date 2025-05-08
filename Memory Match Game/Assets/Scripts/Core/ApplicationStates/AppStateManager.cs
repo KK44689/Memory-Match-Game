@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 
 namespace MemoryMatch.Core.ApplicationStates
 {
-    public class AppStateManager : MonoSingleton<AppStateManager>
+    public class AppStateManager : MonoSingleton<AppStateManager>, IStateManagable
     {
         public static BaseApplicationState CurrentState { get; private set; }
 

@@ -7,7 +7,7 @@ namespace MemoryMatch.Core.ApplicationStates.States
 {
     public class GameplayState : BaseApplicationState
     {
-        public GameplayState(AppStateManager manager) : base(manager)
+        public GameplayState(IStateManagable manager) : base(manager)
         {
         }
 

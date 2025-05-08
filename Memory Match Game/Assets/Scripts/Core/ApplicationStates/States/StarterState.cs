@@ -7,7 +7,7 @@ namespace MemoryMatch.Core.ApplicationStates.States
 {
     public class StarterState : BaseApplicationState
     {
-        public StarterState(AppStateManager manager) : base(manager) { }
+        public StarterState(IStateManagable manager) : base(manager) { }
 
         public override int ID => (int)StateIndex.Starter;
 
