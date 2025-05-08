@@ -28,9 +28,8 @@ namespace MemoryMatch.Core.Card
         private List<ICardElementUI> m_CurrentFlipedIds = new List<ICardElementUI>(2);
         private List<ICardElementUI> m_SpawnedCards = new List<ICardElementUI>();
 
-        private const float CardLifeTime = 1;
-
-        private Coroutine m_FlipCardCoroutine;
+        private const float CardLifeTime = 0.5f;
+        private const float TotalCardAmount = 16;
 
         public UnityAction OnAllCardFliped { get; set; }
 
@@ -52,7 +51,7 @@ namespace MemoryMatch.Core.Card
         {
             InitFrontSprite();
 
-            for(int i = 0; i < 8; i++)
+            for(int i = 0; i < TotalCardAmount; i++)
             {
                 var card = Instantiate(m_CardPrefab, m_CardContainer);
                 var cardElement = card.GetComponent<ICardElementUI>();
@@ -91,17 +90,24 @@ namespace MemoryMatch.Core.Card
             }
         }
 
+        private void FaceDownAllCards()
+        {
+            foreach(var card in m_SpawnedCards)
+            {
+                if(!card.IsAlreadyMatch && card.CurrentCardStatus == CardStatus.FaceUp) card.FlipCard(CardStatus.FaceDown);
+            }
+
+            m_CurrentFlipedIds.Clear();
+        }
+
         private IEnumerator StartCardCountDown(ICardElementUI card)
         {
             yield return new WaitForSeconds(CardLifeTime);
-            card.FlipCard(CardStatus.FaceDown);
-            m_CurrentFlipedIds.Clear();
-            m_FlipCardCoroutine = null;
+            FaceDownAllCards();
         }
 
         private void OnCardFlipedHandler(ICardElementUI card)
         {
-            Debug.Log($"card flip: {card.Id}");
             if(card.CurrentCardStatus == CardStatus.FaceUp) return;
             else if(card.CurrentCardStatus == CardStatus.FaceDown)
             {
@@ -110,36 +116,23 @@ namespace MemoryMatch.Core.Card
 
                 if(m_CurrentFlipedIds.Count > 2)
                 {
-                    foreach(var flipedCard in m_CurrentFlipedIds)
-                    {
-                        flipedCard.FlipCard(CardStatus.FaceDown);
-
-                        if(m_FlipCardCoroutine != null)
-                        {
-                            StopCoroutine(m_FlipCardCoroutine);
-                            m_FlipCardCoroutine = null;
-                        }
-                    }
-
+                    FaceDownAllCards();
                     return;
                 }
 
-                if(m_CurrentFlipedIds.Count == 2 && m_CurrentFlipedIds[0].MatchId == card.Id)
+                if(m_CurrentFlipedIds.Count == 2)
                 {
-                    m_CurrentFlipedIds[0].IsAlreadyMatch = true;
-                    card.IsAlreadyMatch = true;
-                    m_CurrentFlipedIds.Clear();
-
-                    if(m_FlipCardCoroutine != null)
+                    if(m_CurrentFlipedIds[0].MatchId == card.Id)
                     {
-                        StopCoroutine(m_FlipCardCoroutine);
-                        m_FlipCardCoroutine = null;
+                        m_CurrentFlipedIds[0].IsAlreadyMatch = true;
+                        card.IsAlreadyMatch = true;
+                        m_CurrentFlipedIds.Clear();
                     }
-
-                    return;
+                    else
+                    {
+                        StartCoroutine(StartCardCountDown(card));
+                    }
                 }
-
-                m_FlipCardCoroutine = StartCoroutine(StartCardCountDown(card));
             }
         }
     }

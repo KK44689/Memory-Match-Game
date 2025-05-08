@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -25.000002}
-  m_SizeDelta: {x: 0, y: -50}
+  m_AnchoredPosition: {x: 0, y: -13}
+  m_SizeDelta: {x: -48, y: -74}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &213138414
 MonoBehaviour:
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 0
-  m_CellSize: {x: 200, y: 200}
-  m_Spacing: {x: 8, y: 8}
+  m_CellSize: {x: 96, y: 96}
+  m_Spacing: {x: 48, y: 8}
   m_Constraint: 1
   m_ConstraintCount: 4
 --- !u!1 &705507993
@@ -330,6 +330,10 @@ MonoBehaviour:
   - {fileID: 2800000, guid: b6eb4aedc3f9f4d4fa54b2986c818c7a, type: 3}
   - {fileID: 2800000, guid: 71f88bbca18d0e043ba736b58b959d45, type: 3}
   - {fileID: 2800000, guid: e8bcaa6b21c0a1347b8604c5933557fe, type: 3}
+  - {fileID: 2800000, guid: 9e77834ad4f4de34fb663fc5f3631994, type: 3}
+  - {fileID: 2800000, guid: 1f5ad0b6f023d9f4cb33fd27d3e76712, type: 3}
+  - {fileID: 2800000, guid: 9e9772c2650263a42a648667ac3c87ba, type: 3}
+  - {fileID: 2800000, guid: dfef653930d316240b6bc67040a272f9, type: 3}
 --- !u!114 &847787340
 MonoBehaviour:
   m_ObjectHideFlags: 0
