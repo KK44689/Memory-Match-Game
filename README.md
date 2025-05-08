@@ -2,4 +2,4 @@
 
 ## Dependencies Diagram
 
-![MemoryMatchGame-DependenciesDiagram](https://github.com/user-attachments/assets/ada6d08c-a8cf-4cc2-9b0b-108e9ee26916)
+![MemoryMatchGame-DependenciesDiagram drawio](https://github.com/user-attachments/assets/02215a3a-c632-466e-8a82-efe9f26f1e71)
