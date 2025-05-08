@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace MemoryMatch.Core.Card
@@ -30,6 +31,22 @@ namespace MemoryMatch.Core.Card
         private const float CardLifeTime = 1;
 
         private Coroutine m_FlipCardCoroutine;
+
+        public UnityAction OnAllCardFliped { get; set; }
+
+        private void Update()
+        {
+            if(CheckIsAllCardFliped())
+            {
+                OnAllCardFliped?.Invoke();
+            }
+        }
+
+        private bool CheckIsAllCardFliped()
+        {
+            if(m_SpawnedCards.Any(card => card.IsAlreadyMatch == false)) return false;
+            return true;
+        }
 
         public void GenerateCards()
         {
@@ -68,7 +85,7 @@ namespace MemoryMatch.Core.Card
             foreach(var card in m_SpawnedCards)
             {
                 var spawnedTextureList = m_SpawnedCards.Where(spawnedCard => spawnedCard.Id != card.Id && spawnedCard.FrontTexture == card.FrontTexture).ToList();
-              
+
                 card.MatchId = spawnedTextureList[0].Id;
             }
         }

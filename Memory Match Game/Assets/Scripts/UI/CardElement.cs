@@ -1,10 +1,11 @@
+using MemoryMatch.Core.Card;
 using MemoryMatch.Models;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace MemoryMatch.Core.Card
+namespace MemoryMatch.UI
 {
     public class CardElement : MonoBehaviour, ICardElementUI, IPointerDownHandler
     {

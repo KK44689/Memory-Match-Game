@@ -22,11 +22,18 @@ namespace MemoryMatch.Core.ApplicationStates.States
             Debug.Log($"[StateIn] Enter {Name}");
             m_GameplayController = Object.FindObjectsOfType<MonoBehaviour>().OfType<IGameplayControllable>().FirstOrDefault();
             m_GameplayController.StartGameplay();
+            m_GameplayController.OnGameplayEnded += GameplayEndedHandler;
         }
 
         public override void StateOut()
         {
             Debug.Log($"[StateOut] Exit {Name}");
+            m_GameplayController.OnGameplayEnded -= GameplayEndedHandler;
+        }
+
+        private void GameplayEndedHandler()
+        {
+            m_AppStateManager.ChangeStateTo(StateIndex.End);
         }
     }
 }
