@@ -8,6 +8,6 @@ namespace MemoryMatch.Core.ApplicationStates.ControllerInterfaces
 
         UnityAction OnRestart { get; set; }
 
-        void ShowGameEndUI();
+        void ShowGameEndUI(string timerText);
     }
 }

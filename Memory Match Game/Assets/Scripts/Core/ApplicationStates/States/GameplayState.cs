@@ -31,9 +31,9 @@ namespace MemoryMatch.Core.ApplicationStates.States
             m_GameplayController.OnGameplayEnded -= GameplayEndedHandler;
         }
 
-        private void GameplayEndedHandler()
+        private void GameplayEndedHandler(string timerText)
         {
-            m_AppStateManager.ChangeStateTo(StateIndex.End);
+            m_AppStateManager.ChangeStateTo(StateIndex.End, timerText);
         }
     }
 }

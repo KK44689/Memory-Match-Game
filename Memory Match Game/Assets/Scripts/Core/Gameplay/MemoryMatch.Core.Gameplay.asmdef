@@ -2,7 +2,8 @@
     "name": "MemoryMatch.Core.Gameplay",
     "rootNamespace": "",
     "references": [
-        "GUID:2b8771e9cd02e75498f5a866b56d1d05"
+        "GUID:2b8771e9cd02e75498f5a866b56d1d05",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

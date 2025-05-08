@@ -36,9 +36,10 @@ namespace MemoryMatch.Core.EndGame
             OnBackToMenu?.Invoke();
         }
 
-        public void ShowGameEndUI()
+        public void ShowGameEndUI(string timerText)
         {
             m_EndGameUI.SetActiveEndGameUI(true);
+            m_EndGameUI.SetTimerText(timerText);
         }
     }
 }

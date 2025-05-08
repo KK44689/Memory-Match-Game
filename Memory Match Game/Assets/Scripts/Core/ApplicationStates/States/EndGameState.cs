@@ -1,6 +1,9 @@
 using MemoryMatch.Core.ApplicationStates.ControllerInterfaces;
 using MemoryMatch.Models;
+using MemoryMatch.Utilities;
 using System.Linq;
+using Unity.Plastic.Newtonsoft.Json;
+using Unity.VisualScripting.YamlDotNet.Core.Tokens;
 using UnityEngine;
 
 namespace MemoryMatch.Core.ApplicationStates.States
@@ -21,9 +24,17 @@ namespace MemoryMatch.Core.ApplicationStates.States
         {
             Debug.Log($"[StateIn] Enter {Name}");
             m_EndGameplayController = Object.FindObjectsOfType<MonoBehaviour>().OfType<IEndGameControllable>().FirstOrDefault();
-            m_EndGameplayController.ShowGameEndUI();
             m_EndGameplayController.OnBackToMenu += BackToMenuHandler;
             m_EndGameplayController.OnRestart += RestartGameHandler;
+
+            if(DataFormatValidator.IsArgumentContain(args, out string timerText))
+            {
+                m_EndGameplayController.ShowGameEndUI(timerText);
+            }
+            else
+            {
+                m_EndGameplayController.ShowGameEndUI(null);
+            }
         }
 
         public override void StateOut()

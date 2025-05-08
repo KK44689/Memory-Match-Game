@@ -1,5 +1,5 @@
 using MemoryMatch.Core.EndGame;
-using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
@@ -17,9 +17,15 @@ namespace MemoryMatch.UI
         [SerializeField]
         private Button m_RestartButton;
 
+        [SerializeField]
+        private TMP_Text m_ResultText;
+
         public UnityAction OnBackToMenu { get; set; }
 
         public UnityAction OnRestart { get; set; }
+
+        private const string DefaultResultTextFormat = "All matched up — nice job!";
+        private const string TimerResultTextFormat = "You matched your way through in {0} !";
 
         private void Awake()
         {
@@ -42,6 +48,12 @@ namespace MemoryMatch.UI
         public void SetActiveEndGameUI(bool IsActive)
         {
             m_EndGameplayUI.SetActive(IsActive);
+        }
+
+        public void SetTimerText(string timeText)
+        {
+            if(timeText == null) m_ResultText.text = DefaultResultTextFormat;
+            else m_ResultText.text = string.Format(TimerResultTextFormat, timeText);
         }
     }
 }

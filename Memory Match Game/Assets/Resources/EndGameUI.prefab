@@ -781,6 +781,7 @@ MonoBehaviour:
   m_EndGameplayUI: {fileID: 7475828980214785990}
   m_BackToMenuButton: {fileID: 5222749584500312778}
   m_RestartButton: {fileID: 7412616829549049221}
+  m_ResultText: {fileID: 5141450508179244770}
 --- !u!1 &7475828980214785990
 GameObject:
   m_ObjectHideFlags: 0

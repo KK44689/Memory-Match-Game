@@ -4,7 +4,7 @@ namespace MemoryMatch.Core.ApplicationStates.ControllerInterfaces
 {
     public interface IGameplayControllable
     {
-        UnityAction OnGameplayEnded { get; set; }
+        UnityAction<string> OnGameplayEnded { get; set; }
 
         void StartGameplay();
     }

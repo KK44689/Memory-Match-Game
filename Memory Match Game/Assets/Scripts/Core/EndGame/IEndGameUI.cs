@@ -8,5 +8,7 @@ namespace MemoryMatch.Core.EndGame
         UnityAction OnRestart { get; set; }
 
         void SetActiveEndGameUI(bool IsActive);
+
+        void SetTimerText(string text);
     }
 }
