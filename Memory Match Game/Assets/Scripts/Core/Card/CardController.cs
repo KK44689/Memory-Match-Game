@@ -52,7 +52,7 @@ namespace MemoryMatch.Core.Card
         {
             InitFrontSprite();
 
-            for(int i = 0; i < 6; i++)
+            for(int i = 0; i < 8; i++)
             {
                 var card = Instantiate(m_CardPrefab, m_CardContainer);
                 var cardElement = card.GetComponent<ICardElementUI>();
@@ -60,7 +60,8 @@ namespace MemoryMatch.Core.Card
                 cardElement.OnCardFliped += OnCardFlipedHandler;
 
                 // random texture
-                int randomTextureIndex = UnityEngine.Random.Range(0, m_SetTextureAmountDictionary.Count);
+                if(m_SetTextureAmountDictionary.Count == 0) break;
+                int randomTextureIndex = UnityEngine.Random.Range(0, m_SetTextureAmountDictionary.Count - 1);
                 var texture = m_SetTextureAmountDictionary.Select(pair => pair.Key).ToList();
                 cardElement.SetFrontTexture(texture[randomTextureIndex]);
                 m_SetTextureAmountDictionary[texture[randomTextureIndex]]++;
@@ -106,6 +107,22 @@ namespace MemoryMatch.Core.Card
             {
                 card.FlipCard(CardStatus.FaceUp);
                 m_CurrentFlipedIds.Add(card);
+
+                if(m_CurrentFlipedIds.Count > 2)
+                {
+                    foreach(var flipedCard in m_CurrentFlipedIds)
+                    {
+                        flipedCard.FlipCard(CardStatus.FaceDown);
+
+                        if(m_FlipCardCoroutine != null)
+                        {
+                            StopCoroutine(m_FlipCardCoroutine);
+                            m_FlipCardCoroutine = null;
+                        }
+                    }
+
+                    return;
+                }
 
                 if(m_CurrentFlipedIds.Count == 2 && m_CurrentFlipedIds[0].MatchId == card.Id)
                 {
