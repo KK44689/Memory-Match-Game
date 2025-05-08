@@ -15,13 +15,13 @@ namespace MemoryMatch.Core.ApplicationStates.States
 
         public override string Name => StateIndex.Gameplay.ToString();
 
-        private ICardControllable m_CardController;
+        private IGameplayControllable m_GameplayController;
 
         public override void StateIn(params object[] args)
         {
             Debug.Log($"[StateIn] Enter {Name}");
-            m_CardController = Object.FindObjectsOfType<MonoBehaviour>().OfType<ICardControllable>().FirstOrDefault();
-            m_CardController.GenerateCards();
+            m_GameplayController = Object.FindObjectsOfType<MonoBehaviour>().OfType<IGameplayControllable>().FirstOrDefault();
+            m_GameplayController.StartGameplay();
         }
 
         public override void StateOut()
